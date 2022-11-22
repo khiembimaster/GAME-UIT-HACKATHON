@@ -1,0 +1,73 @@
+import { CST } from "../CST";
+export class MenuScene extends Phaser.Scene{
+    constructor(){
+        super(CST.SCENES.MENU);
+    }
+    init(data){
+        console.log(data);
+    }
+    create(){ //creating the menu screen
+
+        //create images(z order)
+
+        this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.2, "logo").setDepth(1);
+
+        this.add.image(0, 0, "title_bg").setOrigin(0);
+
+        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.5, "play_button").setDepth(2);
+
+        let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.6, "options_button").setDepth(2);
+        
+        //create sprites
+        let hoverSprite = this.add.sprite(128, 128, "cat");
+        hoverSprite.setScale(2);
+        hoverSprite.setVisible(false);
+        
+        //create animtion
+        this.anims.create({
+            key: "walk",
+            framerate: 4,
+            repeat: -1,
+            frames: this.anims.generateFrameNumbers("cat",{
+                frame: [0,1,2,3]
+            })
+        })
+        //create audio
+        this.sound.pauseOnBlur = false;
+        this.sound.play("title_music", {
+            loop: true
+        })
+
+        //make image buttons Interactive
+        playButton.setInteractive();
+        playButton.on("pointerover", ()=>{
+            hoverSprite.setVisible(true);
+            hoverSprite.play("walk");
+            hoverSprite.x = playButton.x - playButton.width;
+            hoverSprite.y = playButton.y;
+            // console.log("over");
+        })
+        playButton.on("pointerout", ()=>{
+            hoverSprite.setVisible(false);
+        })
+        playButton.on("pointerup", ()=>{
+            console.log("play");
+        })
+
+        optionButton.setInteractive();
+        optionButton.on("pointerover", ()=>{
+            hoverSprite.setVisible(true);
+            hoverSprite.play("walk");
+            hoverSprite.x = optionButton.x - optionButton.width;
+            hoverSprite.y = optionButton.y;
+        })
+        optionButton.on("pointerout", ()=>{
+            hoverSprite.setVisible(false);
+        })
+        optionButton.on("pointerup", ()=>{
+            console.log("option");
+        })
+
+
+    }
+}
