@@ -6,8 +6,8 @@ import { MenuScene } from "./scenes/MenuScene";
 import { PlayScene } from "./scenes/PlayScene";
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     scene: [LoadScene, MenuScene, PlayScene],
     render:{
         pixelArt: true
@@ -15,11 +15,14 @@ const config = {
     physics:{
         default: 'arcade',
         arcade:{
-            // gravity: {y: 300},
+            gravity: {y: 300},
             debug: true
         },
     },
+    scale:{
+        mode: Phaser.Scale.FIT
+    }
+
 };
 
 const game = new Phaser.Game(config);
-

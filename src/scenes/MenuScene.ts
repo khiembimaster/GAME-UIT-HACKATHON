@@ -25,7 +25,7 @@ export class MenuScene extends Phaser.Scene{
         
         //create animtion
         this.anims.create({
-            key: "walk",
+            key: "walk-cat",
             frameRate: 4,
             repeat: -1,
             frames: this.anims.generateFrameNumbers(CST.SPRITE.CAT,{
@@ -42,7 +42,7 @@ export class MenuScene extends Phaser.Scene{
         playButton.setInteractive();
         playButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
-            hoverSprite.play("walk");
+            hoverSprite.play("walk-cat");
             hoverSprite.x = playButton.x - playButton.width;
             hoverSprite.y = playButton.y;
             // console.log("over");
@@ -58,7 +58,7 @@ export class MenuScene extends Phaser.Scene{
         optionButton.setInteractive();
         optionButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
-            hoverSprite.play("walk");
+            hoverSprite.play("walk-cat");
             hoverSprite.x = optionButton.x - optionButton.width;
             hoverSprite.y = optionButton.y;
         })

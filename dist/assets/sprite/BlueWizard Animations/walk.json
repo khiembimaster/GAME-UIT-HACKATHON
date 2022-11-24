@@ -1,0 +1,440 @@
+{
+	"textures": [
+		{
+			"image": "walk.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1600,
+				"h": 141
+			},
+			"scale": 0.5,
+			"frames": [
+				{
+					"filename": "Chara_BlueWalk00000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 88,
+						"y": 61,
+						"w": 79,
+						"h": 138
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 79,
+						"h": 138
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 138
+					},
+					"frame": {
+						"x": 80,
+						"y": 0,
+						"w": 80,
+						"h": 138
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 60,
+						"w": 80,
+						"h": 140
+					},
+					"frame": {
+						"x": 160,
+						"y": 0,
+						"w": 80,
+						"h": 140
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 60,
+						"w": 79,
+						"h": 141
+					},
+					"frame": {
+						"x": 240,
+						"y": 0,
+						"w": 79,
+						"h": 141
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 60,
+						"w": 80,
+						"h": 141
+					},
+					"frame": {
+						"x": 320,
+						"y": 0,
+						"w": 80,
+						"h": 141
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 60,
+						"w": 79,
+						"h": 140
+					},
+					"frame": {
+						"x": 400,
+						"y": 0,
+						"w": 79,
+						"h": 140
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 60,
+						"w": 80,
+						"h": 138
+					},
+					"frame": {
+						"x": 480,
+						"y": 0,
+						"w": 80,
+						"h": 138
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 60,
+						"w": 79,
+						"h": 134
+					},
+					"frame": {
+						"x": 560,
+						"y": 0,
+						"w": 79,
+						"h": 134
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 60,
+						"w": 80,
+						"h": 138
+					},
+					"frame": {
+						"x": 640,
+						"y": 0,
+						"w": 80,
+						"h": 138
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 138
+					},
+					"frame": {
+						"x": 720,
+						"y": 0,
+						"w": 80,
+						"h": 138
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00010.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 88,
+						"y": 61,
+						"w": 79,
+						"h": 136
+					},
+					"frame": {
+						"x": 800,
+						"y": 0,
+						"w": 79,
+						"h": 136
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00011.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 137
+					},
+					"frame": {
+						"x": 880,
+						"y": 0,
+						"w": 80,
+						"h": 137
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00012.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 62,
+						"w": 79,
+						"h": 137
+					},
+					"frame": {
+						"x": 960,
+						"y": 0,
+						"w": 79,
+						"h": 137
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00013.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 63,
+						"w": 79,
+						"h": 137
+					},
+					"frame": {
+						"x": 1040,
+						"y": 0,
+						"w": 79,
+						"h": 137
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00014.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 64,
+						"w": 78,
+						"h": 136
+					},
+					"frame": {
+						"x": 1120,
+						"y": 0,
+						"w": 78,
+						"h": 136
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00015.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 65,
+						"w": 78,
+						"h": 136
+					},
+					"frame": {
+						"x": 1200,
+						"y": 0,
+						"w": 78,
+						"h": 136
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00016.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 64,
+						"w": 78,
+						"h": 137
+					},
+					"frame": {
+						"x": 1280,
+						"y": 0,
+						"w": 78,
+						"h": 137
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00017.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 63,
+						"w": 79,
+						"h": 137
+					},
+					"frame": {
+						"x": 1360,
+						"y": 0,
+						"w": 79,
+						"h": 137
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00018.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 62,
+						"w": 79,
+						"h": 138
+					},
+					"frame": {
+						"x": 1440,
+						"y": 0,
+						"w": 79,
+						"h": 138
+					}
+				},
+				{
+					"filename": "Chara_BlueWalk00019.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 138
+					},
+					"frame": {
+						"x": 1520,
+						"y": 0,
+						"w": 80,
+						"h": 138
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d9c0d4c3e50e628d53ac265ce1ba51f2:f6c2d65a5d147cb9785bf9b59b6cc8ca:f9e905ee92ca6262c513e44422b15402$"
+	}
+}

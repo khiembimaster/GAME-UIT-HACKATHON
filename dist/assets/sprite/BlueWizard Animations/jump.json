@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "jump.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 244,
+				"h": 427
+			},
+			"scale": 0.5,
+			"frames": [
+				{
+					"filename": "CharaWizardJump_00002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 85,
+						"y": 63,
+						"w": 79,
+						"h": 137
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 79,
+						"h": 137
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 86,
+						"y": 62,
+						"w": 79,
+						"h": 139
+					},
+					"frame": {
+						"x": 82,
+						"y": 1,
+						"w": 79,
+						"h": 139
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 62,
+						"w": 79,
+						"h": 139
+					},
+					"frame": {
+						"x": 163,
+						"y": 1,
+						"w": 79,
+						"h": 139
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 62,
+						"w": 79,
+						"h": 140
+					},
+					"frame": {
+						"x": 1,
+						"y": 140,
+						"w": 79,
+						"h": 140
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 141
+					},
+					"frame": {
+						"x": 82,
+						"y": 142,
+						"w": 80,
+						"h": 141
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 79,
+						"h": 141
+					},
+					"frame": {
+						"x": 164,
+						"y": 142,
+						"w": 79,
+						"h": 141
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 141
+					},
+					"frame": {
+						"x": 1,
+						"y": 285,
+						"w": 80,
+						"h": 141
+					}
+				},
+				{
+					"filename": "CharaWizardJump_00007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 87,
+						"y": 61,
+						"w": 80,
+						"h": 141
+					},
+					"frame": {
+						"x": 83,
+						"y": 285,
+						"w": 80,
+						"h": 141
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:ebc72281477a5c7d79d3c8096455413e:57c9d47677cae0cd3126729d8c10c05a:56c9fa24931e40777fe0ddacfe328adf$"
+	}
+}
