@@ -16,12 +16,32 @@ export class LoadScene extends Phaser.Scene{
             this.load.image(CST.IMAGE[prop], CST.IMAGE[prop]);
         }
     }
+
     loadAudios(){
         this.load.setPath("./assets/audio");
         
         for(let prop in CST.AUDIO){
             //@ts-ignore
             this.load.audio(CST.AUDIO[prop], CST.AUDIO[prop]);
+        }
+    }
+
+    loadMossyImages(){
+        this.load.setPath("./assets/maps/Mossy Assets/Mossy Tileset");
+        
+        for(let prop in CST.MOSSY){
+            //@ts-ignore
+            this.load.image(CST.MOSSY[prop], CST.MOSSY[prop]);
+        }
+    }
+
+    loadBlueWizard(){
+        this.load.setPath("./assets/sprite/BlueWizard Animations");
+        
+        for(let prop in CST.SPRITE.BLUEWIZARD){
+            //@ts-ignore
+            this.load.atlas(CST.SPRITE.BLUEWIZARD[prop], (CST.SPRITE.BLUEWIZARD[prop] + ".png"), (CST.SPRITE.BLUEWIZARD[prop] + ".json"));
+            
         }
     }
 
@@ -37,13 +57,16 @@ export class LoadScene extends Phaser.Scene{
             frameWidth: 32,
             frameHeight: 32
         })
-
+        this.loadBlueWizard();
         //load tiled images
-        this.load.image("terrain", "./assets/image/terrain_atlas.png");
-        this.load.image("items", "./assets/image/items.png");
+        this.loadMossyImages();
         //load tiled map
-        this.load.tilemapTiledJSON("mappy", "./assets/maps/mappy.json");
-            
+        this.load.setPath("./");
+        this.load.tilemapTiledJSON({
+            key:"map", 
+            url: "./assets/maps/map.json"
+        });
+        
 
         // Create a loading bar
         let loadingBar = this.add.graphics({

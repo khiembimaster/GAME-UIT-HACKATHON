@@ -8,20 +8,23 @@ import { PauseScene } from "./scenes/PauseScene";
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     scene: [LoadScene, MenuScene, PauseScene, PlayScene],
-    // render:{
-    //     pixelArt: true
-    // },
+    render:{
+        pixelArt: true
+    },
     physics:{
         default: 'arcade',
         arcade:{
-            // gravity: {y: 300},
+            gravity: {y: 300},
             debug: true
         },
     },
+    scale:{
+        mode: Phaser.Scale.FIT
+    }
+
 };
 
- const game = new Phaser.Game(config);
-
+const game = new Phaser.Game(config);

@@ -136,11 +136,26 @@ exports.CST = {
     PLAY: "play_button.png",
     TITLE: "title_bg.jpg"
   },
+  MOSSY: {
+    BACKGROUND_DECOR: "Mossy - BackgroundDecoration.png",
+    DECOR_HAZARDS: "Mossy - Decorations&Hazards.png",
+    FLOATING_PLATFORMS: "Mossy - FloatingPlatforms.png",
+    HANGLING_PLANTS: "Mossy - Hanging Plants.png",
+    MOSSY_HILLS: "Mossy - MossyHills.png",
+    TILESET: "Mossy - TileSet.png",
+    BACKGROUND: 'theme.jpeg'
+  },
   AUDIO: {
     TITLE: "shuinvy-childhood.mp3"
   },
   SPRITE: {
-    CAT: "cat.png"
+    CAT: "cat.png",
+    BLUEWIZARD: {
+      IDLE: "idle",
+      JUMP: "jump",
+      // DASH: "dasheffect",
+      WALK: "walk"
+    }
   }
 };
 },{}],"src/scenes/LoadScene.ts":[function(require,module,exports) {
@@ -191,6 +206,24 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
       }
     }
   }, {
+    key: "loadMossyImages",
+    value: function loadMossyImages() {
+      this.load.setPath("./assets/maps/Mossy Assets/Mossy Tileset");
+      for (var prop in Constant_1.CST.MOSSY) {
+        //@ts-ignore
+        this.load.image(Constant_1.CST.MOSSY[prop], Constant_1.CST.MOSSY[prop]);
+      }
+    }
+  }, {
+    key: "loadBlueWizard",
+    value: function loadBlueWizard() {
+      this.load.setPath("./assets/sprite/BlueWizard Animations");
+      for (var prop in Constant_1.CST.SPRITE.BLUEWIZARD) {
+        //@ts-ignore
+        this.load.atlas(Constant_1.CST.SPRITE.BLUEWIZARD[prop], Constant_1.CST.SPRITE.BLUEWIZARD[prop] + ".png", Constant_1.CST.SPRITE.BLUEWIZARD[prop] + ".json");
+      }
+    }
+  }, {
     key: "preload",
     value: function preload() {
       var _this = this;
@@ -204,11 +237,15 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
         frameWidth: 32,
         frameHeight: 32
       });
+      this.loadBlueWizard();
       //load tiled images
-      this.load.image("terrain", "./assets/image/terrain_atlas.png");
-      this.load.image("items", "./assets/image/items.png");
+      this.loadMossyImages();
       //load tiled map
-      this.load.tilemapTiledJSON("mappy", "./assets/maps/mappy.json");
+      this.load.setPath("./");
+      this.load.tilemapTiledJSON({
+        key: "map",
+        url: "./assets/maps/map.json"
+      });
       // Create a loading bar
       var loadingBar = this.add.graphics({
         fillStyle: {
@@ -234,6 +271,7 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
   }, {
     key: "create",
     value: function create() {
+      console.log("loaded");
       this.scene.start(Constant_1.CST.SCENES.MENU);
     }
   }]);
@@ -284,7 +322,7 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
       hoverSprite.setVisible(false);
       //create animtion
       this.anims.create({
-        key: "walk",
+        key: "walk-cat",
         frameRate: 4,
         repeat: -1,
         frames: this.anims.generateFrameNumbers(Constant_1.CST.SPRITE.CAT, {
@@ -300,7 +338,7 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
       playButton.setInteractive();
       playButton.on("pointerover", function () {
         hoverSprite.setVisible(true);
-        hoverSprite.play("walk");
+        hoverSprite.play("walk-cat");
         hoverSprite.x = playButton.x - playButton.width;
         hoverSprite.y = playButton.y;
         // console.log("over");
@@ -316,7 +354,7 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
       optionButton.setInteractive();
       optionButton.on("pointerover", function () {
         hoverSprite.setVisible(true);
-        hoverSprite.play("walk");
+        hoverSprite.play("walk-cat");
         hoverSprite.x = optionButton.x - optionButton.width;
         hoverSprite.y = optionButton.y;
       });
@@ -363,13 +401,113 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
     value: function init() {}
   }, {
     key: "preload",
-    value: function preload() {}
+    value: function preload() {
+      this.anims.create({
+        key: Constant_1.CST.SPRITE.BLUEWIZARD.IDLE,
+        duration: 5,
+        frameRate: 30,
+        frames: this.anims.generateFrameNames(Constant_1.CST.SPRITE.BLUEWIZARD.IDLE, {
+          prefix: 'Chara - BlueIdle',
+          suffix: '.png',
+          start: 0,
+          end: 19,
+          zeroPad: 5
+        }),
+        repeat: -1
+      });
+      this.anims.create({
+        key: Constant_1.CST.SPRITE.BLUEWIZARD.WALK,
+        // duration: 5,
+        frameRate: 30,
+        frames: this.anims.generateFrameNames(Constant_1.CST.SPRITE.BLUEWIZARD.WALK, {
+          prefix: 'Chara_BlueWalk',
+          suffix: '.png',
+          start: 0,
+          end: 18,
+          zeroPad: 5
+        }),
+        repeat: -1
+      });
+      this.anims.create({
+        key: Constant_1.CST.SPRITE.BLUEWIZARD.JUMP,
+        // duration: 5,
+        frameRate: 30,
+        frames: this.anims.generateFrameNames(Constant_1.CST.SPRITE.BLUEWIZARD.JUMP, {
+          prefix: 'CharaWizardJump_',
+          suffix: '.png',
+          start: 0,
+          end: 7,
+          zeroPad: 5
+        }),
+        repeat: -1
+      });
+    }
   }, {
     key: "create",
-    value: function create() {}
+    value: function create() {
+      var _this = this;
+      var _a, _b, _c, _d, _e;
+      var map = this.make.tilemap({
+        key: 'map'
+      });
+      var tiles = map.addTilesetImage('Mossy - TileSet', Constant_1.CST.MOSSY.TILESET);
+      var floatingPlatforms = map.addTilesetImage('FloatingPlatforms', Constant_1.CST.MOSSY.FLOATING_PLATFORMS);
+      var hills = map.addTilesetImage('Mossy - MossyHills', Constant_1.CST.MOSSY.MOSSY_HILLS);
+      var decord_hazard = map.addTilesetImage('Decorations&Hazards', Constant_1.CST.MOSSY.DECOR_HAZARDS);
+      var theme = map.addTilesetImage('theme', Constant_1.CST.MOSSY.BACKGROUND);
+      var bg = (_a = map.createLayer("bg", [theme], 0, 0)) === null || _a === void 0 ? void 0 : _a.setScale(0.3).setDepth(-1);
+      var plateau = (_b = map.createLayer("Plateau", [floatingPlatforms, tiles, hills], 0, 0)) === null || _b === void 0 ? void 0 : _b.setScale(0.3);
+      var base = (_c = map.createLayer("Base", [tiles, floatingPlatforms], 0, 0)) === null || _c === void 0 ? void 0 : _c.setScale(0.3);
+      this.cameras.main.setBounds(0, 0, base === null || base === void 0 ? void 0 : base.width, base === null || base === void 0 ? void 0 : base.height);
+      //input
+      this.cursors = (_d = this.input.keyboard) === null || _d === void 0 ? void 0 : _d.createCursorKeys();
+      this.keyboard = (_e = this.input.keyboard) === null || _e === void 0 ? void 0 : _e.addKeys('SPACE');
+      //player
+      this.player = this.physics.add.sprite(this.game.renderer.width / 2, this.game.renderer.height / 2, Constant_1.CST.SPRITE.BLUEWIZARD.IDLE);
+      this.player.setSize(100, 120);
+      this.jumped = false;
+      //  Camera controls
+      this.cameras.main.startFollow(this.player);
+      // map collisions
+      base === null || base === void 0 ? void 0 : base.setCollisionByProperty({
+        collides: true
+      });
+      plateau === null || plateau === void 0 ? void 0 : plateau.setCollisionByProperty({
+        collides: true
+      });
+      this.physics.add.collider(this.player, base, function () {
+        _this.jumped = true;
+      });
+      this.physics.add.collider(this.player, plateau, function () {
+        _this.jumped = true;
+      });
+    }
   }, {
     key: "update",
-    value: function update(time, delta) {}
+    value: function update(time, delta) {
+      var _a, _b;
+      if (this.player) {
+        if ((_a = this.cursors) === null || _a === void 0 ? void 0 : _a.left.isDown) {
+          this.player.setVelocityX(-300);
+          this.player.setFlipX(true);
+          this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.WALK, true);
+        } else if ((_b = this.cursors) === null || _b === void 0 ? void 0 : _b.right.isDown) {
+          this.player.setVelocityX(300);
+          this.player.setFlipX(false);
+          this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.WALK, true);
+        } else {
+          this.player.setVelocityX(0);
+          this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.IDLE, true);
+        }
+        if (this.keyboard.SPACE.isDown) {
+          if (this.jumped) {
+            this.jumped = false;
+            this.player.setVelocityY(-256 * 2);
+            this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.JUMP, true);
+          }
+        }
+      }
+    }
   }]);
   return PlayScene;
 }(Phaser.Scene);
@@ -386,8 +524,8 @@ var MenuScene_1 = require("./scenes/MenuScene");
 var PlayScene_1 = require("./scenes/PlayScene");
 var config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 1200,
+  height: 800,
   scene: [LoadScene_1.LoadScene, MenuScene_1.MenuScene, PlayScene_1.PlayScene],
   render: {
     pixelArt: true
@@ -395,9 +533,14 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      // gravity: {y: 300},
+      gravity: {
+        y: 300
+      },
       debug: true
     }
+  },
+  scale: {
+    mode: Phaser.Scale.FIT
   }
 };
 var game = new Phaser.Game(config);
@@ -426,7 +569,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56609" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61657" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
