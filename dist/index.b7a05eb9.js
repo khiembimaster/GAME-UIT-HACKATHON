@@ -538,23 +538,28 @@ var _playScene = require("./scenes/PlayScene");
 var _pauseScene = require("./scenes/PauseScene");
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     scene: [
         (0, _loadScene.LoadScene),
         (0, _menuScene.MenuScene),
         (0, _pauseScene.PauseScene),
         (0, _playScene.PlayScene)
     ],
-    // render:{
-    //     pixelArt: true
-    // },
+    render: {
+        pixelArt: true
+    },
     physics: {
         default: "arcade",
         arcade: {
-            // gravity: {y: 300},
+            gravity: {
+                y: 300
+            },
             debug: true
         }
+    },
+    scale: {
+        mode: Phaser.Scale.FIT
     }
 };
 const game = new Phaser.Game(config);
@@ -579,6 +584,16 @@ class LoadScene extends Phaser.Scene {
         for(let prop in (0, _constant.CST).AUDIO)//@ts-ignore
         this.load.audio((0, _constant.CST).AUDIO[prop], (0, _constant.CST).AUDIO[prop]);
     }
+    loadMossyImages() {
+        this.load.setPath("./assets/maps/Mossy Assets/Mossy Tileset");
+        for(let prop in (0, _constant.CST).MOSSY)//@ts-ignore
+        this.load.image((0, _constant.CST).MOSSY[prop], (0, _constant.CST).MOSSY[prop]);
+    }
+    loadBlueWizard() {
+        this.load.setPath("./assets/sprite/BlueWizard Animations");
+        for(let prop in (0, _constant.CST).SPRITE.BLUEWIZARD)//@ts-ignore
+        this.load.atlas((0, _constant.CST).SPRITE.BLUEWIZARD[prop], (0, _constant.CST).SPRITE.BLUEWIZARD[prop] + ".png", (0, _constant.CST).SPRITE.BLUEWIZARD[prop] + ".json");
+    }
     preload() {
         //change screen resolution to: 800x600
         //load atlases
@@ -590,11 +605,15 @@ class LoadScene extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 32
         });
+        this.loadBlueWizard();
         //load tiled images
-        this.load.image("terrain", "./assets/image/terrain_atlas.png");
-        this.load.image("items", "./assets/image/items.png");
+        this.loadMossyImages();
         //load tiled map
-        this.load.tilemapTiledJSON("mappy", "./assets/maps/mappy.json");
+        this.load.setPath("./");
+        this.load.tilemapTiledJSON({
+            key: "map",
+            url: "./assets/maps/map.json"
+        });
         // Create a loading bar
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -641,11 +660,26 @@ const CST = {
         PLAY: "play_button.png",
         TITLE: "title_bg.jpg"
     },
+    MOSSY: {
+        BACKGROUND_DECOR: "Mossy - BackgroundDecoration.png",
+        DECOR_HAZARDS: "Mossy - Decorations&Hazards.png",
+        FLOATING_PLATFORMS: "Mossy - FloatingPlatforms.png",
+        HANGLING_PLANTS: "Mossy - Hanging Plants.png",
+        MOSSY_HILLS: "Mossy - MossyHills.png",
+        TILESET: "Mossy - TileSet.png",
+        BACKGROUND: "theme.jpeg"
+    },
     AUDIO: {
         TITLE: "shuinvy-childhood.mp3"
     },
     SPRITE: {
-        CAT: "cat.png"
+        CAT: "cat.png",
+        BLUEWIZARD: {
+            IDLE: "idle",
+            JUMP: "jump",
+            // DASH: "dasheffect",
+            WALK: "walk"
+        }
     }
 };
 const GUICST = {
@@ -717,7 +751,7 @@ class MenuScene extends Phaser.Scene {
         hoverSprite.setVisible(false);
         //create animtion 
         this.anims.create({
-            key: "walk",
+            key: "walk-cat",
             frameRate: 4,
             repeat: -1,
             frames: this.anims.generateFrameNumbers((0, _constant.CST).SPRITE.CAT, {
@@ -738,7 +772,7 @@ class MenuScene extends Phaser.Scene {
         playButton.setInteractive();
         playButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
-            hoverSprite.play("walk");
+            hoverSprite.play("walk-cat");
             hoverSprite.x = playButton.x - playButton.width;
             hoverSprite.y = playButton.y;
         // console.log("over");
@@ -753,7 +787,7 @@ class MenuScene extends Phaser.Scene {
         optionButton.setInteractive();
         optionButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
-            hoverSprite.play("walk");
+            hoverSprite.play("walk-cat");
             hoverSprite.x = optionButton.x - optionButton.width;
             hoverSprite.y = optionButton.y;
         });
@@ -779,9 +813,116 @@ class PlayScene extends Phaser.Scene {
         super((0, _constant.CST).SCENES.PLAY);
     }
     init() {}
-    preload() {}
-    create() {}
-    update(time, delta) {}
+    preload() {
+        this.anims.create({
+            key: (0, _constant.CST).SPRITE.BLUEWIZARD.IDLE,
+            duration: 5,
+            frameRate: 30,
+            frames: this.anims.generateFrameNames((0, _constant.CST).SPRITE.BLUEWIZARD.IDLE, {
+                prefix: "Chara - BlueIdle",
+                suffix: ".png",
+                start: 0,
+                end: 19,
+                zeroPad: 5
+            }),
+            repeat: -1
+        });
+        this.anims.create({
+            key: (0, _constant.CST).SPRITE.BLUEWIZARD.WALK,
+            // duration: 5,
+            frameRate: 30,
+            frames: this.anims.generateFrameNames((0, _constant.CST).SPRITE.BLUEWIZARD.WALK, {
+                prefix: "Chara_BlueWalk",
+                suffix: ".png",
+                start: 0,
+                end: 18,
+                zeroPad: 5
+            }),
+            repeat: -1
+        });
+        this.anims.create({
+            key: (0, _constant.CST).SPRITE.BLUEWIZARD.JUMP,
+            // duration: 5,
+            frameRate: 30,
+            frames: this.anims.generateFrameNames((0, _constant.CST).SPRITE.BLUEWIZARD.JUMP, {
+                prefix: "CharaWizardJump_",
+                suffix: ".png",
+                start: 0,
+                end: 7,
+                zeroPad: 5
+            }),
+            repeat: -1
+        });
+    }
+    create() {
+        const map = this.make.tilemap({
+            key: "map"
+        });
+        const tiles = map.addTilesetImage("Mossy - TileSet", (0, _constant.CST).MOSSY.TILESET);
+        const floatingPlatforms = map.addTilesetImage("FloatingPlatforms", (0, _constant.CST).MOSSY.FLOATING_PLATFORMS);
+        const hills = map.addTilesetImage("Mossy - MossyHills", (0, _constant.CST).MOSSY.MOSSY_HILLS);
+        const decord_hazard = map.addTilesetImage("Decorations&Hazards", (0, _constant.CST).MOSSY.DECOR_HAZARDS);
+        const theme = map.addTilesetImage("theme", (0, _constant.CST).MOSSY.BACKGROUND);
+        let bg = map.createLayer("bg", [
+            theme
+        ], 0, 0)?.setScale(0.3).setDepth(-1);
+        let plateau = map.createLayer("Plateau", [
+            floatingPlatforms,
+            tiles,
+            hills
+        ], 0, 0)?.setScale(0.3);
+        let base = map.createLayer("Base", [
+            tiles,
+            floatingPlatforms
+        ], 0, 0)?.setScale(0.3);
+        this.cameras.main.setBounds(0, 0, base?.width, base?.height);
+        //input
+        this.cursors = this.input.keyboard?.createCursorKeys();
+        this.keyboard = this.input.keyboard?.addKeys("SPACE");
+        //player
+        this.player = this.physics.add.sprite(this.game.renderer.width / 2, this.game.renderer.height / 2, (0, _constant.CST).SPRITE.BLUEWIZARD.IDLE);
+        this.player.setSize(100, 120);
+        this.jumped = false;
+        this.player.setBounce(0.2);
+        //  Camera controls
+        this.cameras.main.startFollow(this.player);
+        // map collisions
+        base?.setCollisionByProperty({
+            collides: true
+        });
+        plateau?.setCollisionByProperty({
+            collides: true
+        });
+        this.physics.add.collider(this.player, base, ()=>{
+            this.jumped = true;
+        });
+        this.physics.add.collider(this.player, plateau, ()=>{
+            this.jumped = true;
+        });
+    }
+    update(time, delta) {
+        if (this.player) {
+            if (this.cursors?.left.isDown) {
+                this.player.setVelocityX(-300);
+                this.player.setFlipX(true);
+                this.player.anims.play((0, _constant.CST).SPRITE.BLUEWIZARD.WALK, true);
+            } else if (this.cursors?.right.isDown) {
+                this.player.setVelocityX(300);
+                this.player.setFlipX(false);
+                this.player.anims.play((0, _constant.CST).SPRITE.BLUEWIZARD.WALK, true);
+            } else {
+                this.player.setVelocityX(0);
+                this.player.anims.play((0, _constant.CST).SPRITE.BLUEWIZARD.IDLE, true);
+            }
+            if (this.keyboard.SPACE.isDown) {
+                if (this.jumped) {
+                    this.jumped = false;
+                    this.player.setVelocityY(-512);
+                    this.player.anims.play((0, _constant.CST).SPRITE.BLUEWIZARD.JUMP, true);
+                }
+            }
+        }
+    }
 }
 
 },{"../Constant":"2gQy0","@parcel/transformer-js/src/esmodule-helpers.js":"i6LWH"}],"lAPRT":[function(require,module,exports) {
