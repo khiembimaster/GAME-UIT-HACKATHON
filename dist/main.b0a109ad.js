@@ -445,29 +445,41 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
   }, {
     key: "create",
     value: function create() {
-      var _a, _b, _c, _d;
+      var _this = this;
+      var _a, _b, _c, _d, _e;
       var map = this.make.tilemap({
         key: 'map'
       });
       var tiles = map.addTilesetImage('Mossy - TileSet', Constant_1.CST.MOSSY.TILESET);
-      var hills = map.addTilesetImage('FloatingPlatforms', Constant_1.CST.MOSSY.FLOATING_PLATFORMS);
+      var floatingPlatforms = map.addTilesetImage('FloatingPlatforms', Constant_1.CST.MOSSY.FLOATING_PLATFORMS);
+      var hills = map.addTilesetImage('Mossy - MossyHills', Constant_1.CST.MOSSY.MOSSY_HILLS);
+      var decord_hazard = map.addTilesetImage('Decorations&Hazards', Constant_1.CST.MOSSY.DECOR_HAZARDS);
       var theme = map.addTilesetImage('theme', Constant_1.CST.MOSSY.BACKGROUND);
-      var bg = (_a = map.createLayer("bg", [theme], 0, 0)) === null || _a === void 0 ? void 0 : _a.setScale(0.2);
-      var base = (_b = map.createLayer("Base", [tiles, hills], 0, 0)) === null || _b === void 0 ? void 0 : _b.setScale(0.2);
+      var bg = (_a = map.createLayer("bg", [theme], 0, 0)) === null || _a === void 0 ? void 0 : _a.setScale(0.3).setDepth(-1);
+      var plateau = (_b = map.createLayer("Plateau", [floatingPlatforms, tiles, hills], 0, 0)) === null || _b === void 0 ? void 0 : _b.setScale(0.3);
+      var base = (_c = map.createLayer("Base", [tiles, floatingPlatforms], 0, 0)) === null || _c === void 0 ? void 0 : _c.setScale(0.3);
       this.cameras.main.setBounds(0, 0, base === null || base === void 0 ? void 0 : base.width, base === null || base === void 0 ? void 0 : base.height);
       //input
-      this.cursors = (_c = this.input.keyboard) === null || _c === void 0 ? void 0 : _c.createCursorKeys();
-      this.keyboard = (_d = this.input.keyboard) === null || _d === void 0 ? void 0 : _d.addKeys('SPACE');
+      this.cursors = (_d = this.input.keyboard) === null || _d === void 0 ? void 0 : _d.createCursorKeys();
+      this.keyboard = (_e = this.input.keyboard) === null || _e === void 0 ? void 0 : _e.addKeys('SPACE');
       //player
       this.player = this.physics.add.sprite(this.game.renderer.width / 2, this.game.renderer.height / 2, Constant_1.CST.SPRITE.BLUEWIZARD.IDLE);
+      this.player.setSize(100, 120);
+      this.jumped = false;
       //  Camera controls
       this.cameras.main.startFollow(this.player);
       // map collisions
       base === null || base === void 0 ? void 0 : base.setCollisionByProperty({
         collides: true
       });
+      plateau === null || plateau === void 0 ? void 0 : plateau.setCollisionByProperty({
+        collides: true
+      });
       this.physics.add.collider(this.player, base, function () {
-        console.log("collide");
+        _this.jumped = true;
+      });
+      this.physics.add.collider(this.player, plateau, function () {
+        _this.jumped = true;
       });
     }
   }, {
@@ -476,22 +488,23 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       var _a, _b;
       if (this.player) {
         if ((_a = this.cursors) === null || _a === void 0 ? void 0 : _a.left.isDown) {
-          this.player.setVelocityX(-256);
+          this.player.setVelocityX(-300);
           this.player.setFlipX(true);
           this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.WALK, true);
-          console.log('WALK LEFT');
         } else if ((_b = this.cursors) === null || _b === void 0 ? void 0 : _b.right.isDown) {
-          this.player.setVelocityX(256);
+          this.player.setVelocityX(300);
           this.player.setFlipX(false);
           this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.WALK, true);
-          console.log('WALK RIGHT');
         } else {
           this.player.setVelocityX(0);
           this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.IDLE, true);
         }
         if (this.keyboard.SPACE.isDown) {
-          this.player.setVelocityY(-256);
-          this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.JUMP, true);
+          if (this.jumped) {
+            this.jumped = false;
+            this.player.setVelocityY(-256 * 2);
+            this.player.anims.play(Constant_1.CST.SPRITE.BLUEWIZARD.JUMP, true);
+          }
         }
       }
     }
@@ -556,7 +569,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63361" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61657" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
