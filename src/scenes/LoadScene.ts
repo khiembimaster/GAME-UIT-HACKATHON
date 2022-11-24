@@ -3,9 +3,11 @@ export class LoadScene extends Phaser.Scene{
     constructor(){
         super(CST.SCENES.LOAD);
     }
+
     init(){
 
     }
+
     loadImages(){
         this.load.setPath("./assets/image");
         
@@ -68,8 +70,10 @@ export class LoadScene extends Phaser.Scene{
             console.log(file.src);
        })
     }
-    create(){
+
+    create() {
+        // Disable this scene
+        this.scene.start(CST.SCENES.MENU);    
         
-        this.scene.start(CST.SCENES.MENU);
     }
 }

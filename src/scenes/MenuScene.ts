@@ -1,12 +1,12 @@
 import { CST } from "../Constant";
-export class MenuScene extends Phaser.Scene{
-    constructor(){
+export class MenuScene extends Phaser.Scene {
+    constructor() {
         super(CST.SCENES.MENU);
     }
-    init(){
-        
+    init() {
+
     }
-    create(){ //creating the menu screen
+    create() { //creating the menu screen
 
         //create images(z order)
 
@@ -17,21 +17,22 @@ export class MenuScene extends Phaser.Scene{
         let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.5, CST.IMAGE.PLAY).setDepth(2);
 
         let optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.6, CST.IMAGE.OPTIONS).setDepth(2);
-        
+
         //create sprites
         let hoverSprite = this.add.sprite(128, 128, CST.SPRITE.CAT);
         hoverSprite.setScale(2);
         hoverSprite.setVisible(false);
-        
-        //create animtion
+
+        //create animtion 
         this.anims.create({
             key: "walk",
             frameRate: 4,
             repeat: -1,
-            frames: this.anims.generateFrameNumbers(CST.SPRITE.CAT,{
-                frames: [0,1,2,3]
+            frames: this.anims.generateFrameNumbers(CST.SPRITE.CAT, {
+                frames: [0, 1, 2, 3]
             })
         })
+
         //create audio
         this.sound.pauseOnBlur = false;
         this.sound.play(CST.AUDIO.TITLE, {
@@ -40,36 +41,37 @@ export class MenuScene extends Phaser.Scene{
 
         //make image buttons Interactive
         playButton.setInteractive();
-        playButton.on("pointerover", ()=>{
+        playButton.on("pointerover", () => {
             hoverSprite.setVisible(true);
             hoverSprite.play("walk");
             hoverSprite.x = playButton.x - playButton.width;
             hoverSprite.y = playButton.y;
             // console.log("over");
         })
-        playButton.on("pointerout", ()=>{
+        playButton.on("pointerout", () => {
             hoverSprite.setVisible(false);
         })
-        playButton.on("pointerup", ()=>{
+        playButton.on("pointerup", () => {
             // console.log("play");
             this.scene.start(CST.SCENES.PLAY);
         })
 
         optionButton.setInteractive();
-        optionButton.on("pointerover", ()=>{
+        optionButton.on("pointerover", () => {
             hoverSprite.setVisible(true);
             hoverSprite.play("walk");
             hoverSprite.x = optionButton.x - optionButton.width;
             hoverSprite.y = optionButton.y;
         })
-        optionButton.on("pointerout", ()=>{
+        optionButton.on("pointerout", () => {
             hoverSprite.setVisible(false);
         })
-        optionButton.on("pointerup", ()=>{
+        optionButton.on("pointerup", () => {
             // console.log("option");
             // this.scene.launch();
+            this.scene.pause();
+            /**@ts-ignore */
+            this.scene.launch(CST.SCENES.PAUSE, CST.SCENES.MENU);
         })
-
-
     }
 }
