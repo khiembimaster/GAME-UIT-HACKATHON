@@ -35,15 +35,7 @@ export class LoadScene extends Phaser.Scene{
         }
     }
 
-    loadBlueWizard(){
-        this.load.setPath("./assets/sprite/BlueWizard Animations");
-        
-        for(let prop in CST.SPRITE.BLUEWIZARD){
-            //@ts-ignore
-            this.load.atlas(CST.SPRITE.BLUEWIZARD[prop], (CST.SPRITE.BLUEWIZARD[prop] + ".png"), (CST.SPRITE.BLUEWIZARD[prop] + ".json"));
-            
-        }
-    }
+    
 
     preload(){
         //change screen resolution to: 800x600

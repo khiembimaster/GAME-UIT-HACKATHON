@@ -25,12 +25,7 @@ export const CST = {
     },
     SPRITE:{
         CAT:"cat.png",
-        BLUEWIZARD:{
-            IDLE: "idle",
-            JUMP: "jump",
-            // DASH: "dasheffect",
-            WALK: "walk",
-        }
+        
     }
 }
 

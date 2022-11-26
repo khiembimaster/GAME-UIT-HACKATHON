@@ -2,7 +2,7 @@ import { Physics } from "phaser";
 import { CST } from "../Constant"
 
 export class PlayScene extends Phaser.Scene{
-    keyboard: Phaser.Types.Input.Keyboard;
+    keyboard: Phaser.Types.Input.Ke
     cursor: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
     player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
@@ -15,47 +15,7 @@ export class PlayScene extends Phaser.Scene{
         
     }
     preload(){
-        this.anims.create({
-            key: CST.SPRITE.BLUEWIZARD.IDLE,
-            duration: 5,
-            frameRate: 30,
-            frames: this.anims.generateFrameNames(CST.SPRITE.BLUEWIZARD.IDLE, {
-                prefix: 'Chara - BlueIdle',
-                suffix: '.png',
-                start: 0,
-                end: 19,
-                zeroPad: 5,
-            }),
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: CST.SPRITE.BLUEWIZARD.WALK,
-            // duration: 5,
-            frameRate: 30,
-            frames: this.anims.generateFrameNames(CST.SPRITE.BLUEWIZARD.WALK, {
-                prefix: 'Chara_BlueWalk',
-                suffix: '.png',
-                start: 0,
-                end: 18,
-                zeroPad: 5,
-            }),
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: CST.SPRITE.BLUEWIZARD.JUMP,
-            // duration: 5,
-            frameRate: 30,
-            frames: this.anims.generateFrameNames(CST.SPRITE.BLUEWIZARD.JUMP, {
-                prefix: 'CharaWizardJump_',
-                suffix: '.png',
-                start: 0,
-                end: 7,
-                zeroPad: 5,
-            }),
-            repeat: -1,
-        });
+        
         
         
     }
