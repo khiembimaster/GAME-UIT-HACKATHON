@@ -2,11 +2,11 @@ import { Physics } from "phaser";
 import { CST } from "../Constant"
 
 export class PlayScene extends Phaser.Scene{
-    keyboard: Phaser.Types.Input.Ke
+    keyboard: Phaser.Types.Input.Keyboard
     cursor: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
     player!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
-    jumped: boolean;
+    jumped!: boolean;
 
     constructor(){
         super(CST.SCENES.PLAY);
@@ -32,6 +32,7 @@ export class PlayScene extends Phaser.Scene{
         let bg = map.createLayer("bg", [theme], 0, 0)?.setScale(0.3).setDepth(-1);
         let plateau = map.createLayer("Plateau", [floatingPlatforms, tiles, hills], 0, 0)?.setScale(0.3);
         let base = map.createLayer("Base", [tiles, floatingPlatforms], 0, 0)?.setScale(0.3);
+        
         this.cameras.main.setBounds(0, 0, base?.width, base?.height);
 
         //input
@@ -41,7 +42,8 @@ export class PlayScene extends Phaser.Scene{
         this.player = this.physics.add.sprite(this.game.renderer.width/2,this.game.renderer.height/2, CST.SPRITE.BLUEWIZARD.IDLE);
         this.player.setSize(100, 120);
         this.jumped = false;
-        //  Camera controls
+        this.player.setBounce(0.2);
+       //  Camera controls
         this.cameras.main.startFollow(this.player);
         
         // map collisions
